@@ -1,0 +1,12 @@
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  namespace: openshift-adp
+  name: restore-mysql
+spec:
+  backupName: mysql-backup01
+  restorePVs: true
+  includedNamespaces:
+    - a-exampleapp
+  namespaceMapping:
+    a-exampleapp: a-exampleapp-restore
