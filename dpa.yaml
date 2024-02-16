@@ -1,0 +1,31 @@
+apiVersion: oadp.openshift.io/v1alpha1
+kind: DataProtectionApplication
+metadata:
+  name: dpa1
+  namespace: openshift-adp
+spec:
+  backupLocations:
+    - velero:
+        config:
+          insecureSkipTLSVerify: 'true'
+          profile: default
+          region: minio
+          s3ForcePathStyle: 'true'
+          s3Url: 'https://s3-openshift-storage.apps.ocpdso.dso.local'
+        credential:
+          key: cloud
+          name: cloud-credentials
+        default: true
+        objectStorage:
+          bucket: odap-s3-20ed4365-7696-4e4b-b259-2d67937bb088
+          prefix: velero
+        provider: aws
+  configuration:
+    velero:
+      defaultPlugins:
+        - aws
+        - csi
+        - openshift
+      resourceTimeout: 10m
+    restic:
+      enable: true 
