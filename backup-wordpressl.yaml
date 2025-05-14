@@ -1,0 +1,18 @@
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: wordpress-backup
+  namespace: openshift-adp
+  labels:
+    velero.io/storage-location: dpa-ocp-minio-1
+spec:
+  csiSnapshotTimeout: 10m0s
+  defaultVolumesToFsBackup: true
+  includedNamespaces:
+    - a2-wordpress
+  itemOperationTimeout: 4h0m0s
+  snapshotMoveData: true
+  storageLocation: dpa-ocp-minio-1
+  ttl: 720h0m0s
+  volumeSnapshotLocations: 
+  - dpa-ocp-minio-1

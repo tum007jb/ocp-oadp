@@ -1,0 +1,36 @@
+apiVersion: oadp.openshift.io/v1alpha1
+kind: DataProtectionApplication
+metadata:
+  name: dpa-ocp-minio
+  namespace: openshift-adp
+spec:
+  backupLocations:
+    - velero:
+        config:
+          insecureSkipTLSVerify: 'true'
+          profile: default
+          region: minio
+          s3ForcePathStyle: 'true'
+          s3Url: 'http://api-minio-dso.apps.ocpdso.dso.local'
+        credential:
+          key: cloud
+          name: cloud-credentials
+        default: true
+        objectStorage:
+          bucket: backup
+          prefix: dsoapp
+        provider: aws
+  configuration:
+    velero:
+      defaultPlugins:
+        - csi
+        - openshift
+        - aws
+    restic:
+      enable: true 
+  snapshotLocations:
+    - velero:
+        config:
+          profile: default
+          region: minio
+        provider: aws

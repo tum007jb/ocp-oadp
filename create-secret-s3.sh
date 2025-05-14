@@ -1,0 +1,1 @@
+oc create secret generic cloud-credentials -n openshift-adp --from-file cloud=cloud-credentail-s3-minio

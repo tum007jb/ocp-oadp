@@ -1,0 +1,18 @@
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: dso-vm-backup-1
+  namespace: openshift-adp
+  labels:
+    velero.io/storage-location: dpa-vir-1
+spec:
+  hooks: {}
+  includedNamespaces:
+  - dso-vm
+  includedResources: [] 
+  excludedResources: [] 
+  storageLocation: dpa-vir-1 
+  ttl: 720h0m0s
+  labelSelector: 
+    matchLabels: 
+      app: www

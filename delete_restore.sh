@@ -1,0 +1,1 @@
+oc delete restore restore-wordpress -n openshift-adp

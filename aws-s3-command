@@ -1,7 +1,12 @@
 #export AWS_CA_BUNDLE="/root/oadp/ca-defult.pem"
 
-aws s3 ls s3://odap-s3-20ed4365-7696-4e4b-b259-2d67937bb088 --endpoint-url https://s3-openshift-storage.apps.ocpdso.dso.local
-aws s3 rm s3://odap-s3-20ed4365-7696-4e4b-b259-2d67937bb088/velero/backups/mysql-backup01 --endpoint-url https://s3-openshift-storage.apps.ocpdso.dso.local
+aws s3 ls s3://odap-s3-20ed4365-7696-4e4b-b259-2d67937bb088 --endpoint-url https://s3-openshift-storage.apps.ocpdso.dso.local --no-verify-ssl
+aws s3 rm s3://odap-s3-20ed4365-7696-4e4b-b259-2d67937bb088/velero/backups/mysql-backup01 --endpoint-url https://s3-openshift-storage.apps.ocpdso.dso.local --no-verify-ssl
 
 # delete all S3 data
-aws s3 rm s3://odap-s3-20ed4365-7696-4e4b-b259-2d67937bb088 --recursive --endpoint-url https://s3-openshift-storage.apps.ocpdso.dso.local
+aws s3 rm s3://odap-s3-20ed4365-7696-4e4b-b259-2d67937bb088 --recursive --endpoint-url https://s3-openshift-storage.apps.ocpdso.dso.local --no-verify-ssl
+
+
+# Syn Backup
+
+aws s3 sync s3://odap-s3-20ed4365-7696-4e4b-b259-2d67937bb088/velero /root/s3-backup --endpoint-url https://s3-openshift-storage.apps.ocpdso.dso.local --no-verify-ssl

@@ -2,11 +2,14 @@ apiVersion: velero.io/v1
 kind: Restore
 metadata:
   namespace: openshift-adp
-  name: restore-wordpress
+  name: restore-wordpress-2
 spec:
   backupName: wordpress-backup
   restorePVs: true
-  includedNamespaces: []
+  includedNamespaces:
+  - a2-wordpress
+  namespaceMapping:
+    a2-wordpress: a-exampleapp-restore
   excludedResources:
   - nodes
   - events

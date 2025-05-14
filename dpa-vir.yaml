@@ -1,0 +1,37 @@
+apiVersion: oadp.openshift.io/v1alpha1
+kind: DataProtectionApplication
+metadata:
+  name: dpa-vir
+  namespace: openshift-adp
+spec:
+  backupLocations:
+    - velero:
+        config:
+          insecureSkipTLSVerify: 'true'
+          profile: default
+          region: minio
+          s3ForcePathStyle: 'true'
+          s3Url: 'http://192.168.172.49:9000'
+        credential:
+          key: cloud
+          name: cloud-credentials
+        default: true
+        objectStorage:
+          bucket: oadp
+          prefix: velero
+        provider: aws
+  configuration:
+    velero:
+      defaultPlugins:
+        - csi
+        - openshift
+        - aws
+        - kubevirt 
+    restic:
+      enable: true 
+  snapshotLocations:
+    - velero:
+        config:
+          profile: default
+          region: minio
+        provider: aws

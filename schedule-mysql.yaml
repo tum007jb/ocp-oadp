@@ -1,0 +1,14 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: schedule-mysql
+  namespace: openshift-adp
+spec:
+  schedule: 0 2 * * * 
+  template:
+    hooks: {}
+    includedNamespaces:
+    - a2-wordpress 
+    storageLocation: dpa1-1 
+    defaultVolumesToFsBackup: true 
+    ttl: 720h0m0s
